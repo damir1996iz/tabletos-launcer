@@ -2,13 +2,29 @@
 #define MAINWIDGET_H
 
 #include <QWidget>
+#include <QDebug>
+#include <QPushButton>
+#include <QMessageBox>
+#include <QProcess>
+#include <QScrollArea>
+#include <QGridLayout>
+#include <QVBoxLayout>
 
-class MainWIdget : public QWidget
+#include "i3ipc.h"
+#include "appicon/applicationiconfactory.h"
+
+class MainWidget : public QWidget
 {
     Q_OBJECT
+private:
+    QVBoxLayout* mainLayout;
+    QScrollArea* scrollArea;
+    QWidget* innerWidget;
+    QGridLayout* gridLayout;
 
+    std::vector<std::unique_ptr<ApplicationIcon>> icons;
 public:
-    MainWIdget(QWidget *parent = nullptr);
-    ~MainWIdget();
+    MainWidget(QWidget *parent = nullptr);
+    ~MainWidget();
 };
 #endif // MAINWIDGET_H
