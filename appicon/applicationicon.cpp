@@ -58,6 +58,16 @@ void ApplicationIcon::initIconAndText()
     layout->addWidget(lbl_text);
 }
 
+QString ApplicationIcon::getCommand()
+{
+    return applicationInfo["Exec"];
+}
+
+bool ApplicationIcon::isTerminal()
+{
+    return applicationInfo["Terminal"]=="true"?true:false;
+}
+
 void ApplicationIcon::mousePressEvent(QMouseEvent *event)
 {
     clickTimer->start(2000);
@@ -68,12 +78,12 @@ void ApplicationIcon::mouseReleaseEvent(QMouseEvent *event)
     if(clickTimer->isActive())
     {
         clickTimer->stop();
-        emit clicked(this);
+    //    emit clicked(this);
     }
 }
 
 void ApplicationIcon::slot_clickTimer()
 {
     clickTimer->stop();
-    emit long_clicked(this);
+    //emit long_clicked(this);
 }

@@ -9,10 +9,10 @@ bool ApplicationLauncer::exec(QString cmd, bool terminal)
 {
     if(terminal)
     {
-
+        return QProcess::startDetached("xtrerm "+cmd, QStringList()<<"");
     }
     else
     {
-        QProcess::startDetached(cmd);
+        return QProcess::startDetached(cmd, QStringList()<<"");
     }
 }

@@ -12,6 +12,7 @@
 
 #include "i3ipc.h"
 #include "appicon/applicationiconfactory.h"
+#include "applauncer/applicationlauncer.h"
 
 class MainWidget : public QWidget
 {
@@ -23,8 +24,10 @@ private:
     QGridLayout* gridLayout;
 
     std::vector<std::unique_ptr<ApplicationIcon>> icons;
+    ApplicationLauncer* launcher;
 public:
     MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
+
 };
 #endif // MAINWIDGET_H

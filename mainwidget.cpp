@@ -20,12 +20,13 @@ MainWidget::MainWidget(QWidget *parent)
     innerWidget->setLayout(gridLayout);
 
     icons = ApplicationIconFactory::generateIcons("/usr/share/applications");
-    auto i = 0,num = 0;
+    auto i = 0;
     for(auto& item:icons)
     {
         item->initIconAndText();
         item->setParent(this);
         gridLayout->addWidget(item.get(),i/5,i%5);
+
         i++;
     }
 }
