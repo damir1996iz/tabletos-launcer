@@ -9,10 +9,13 @@
 #include <QScrollArea>
 #include <QGridLayout>
 #include <QVBoxLayout>
+#include <QScroller>
+#include <QMenu>
 
 #include "i3ipc.h"
 #include "appicon/applicationiconfactory.h"
 #include "applauncer/applicationlauncer.h"
+#include "workspaceswidget/workspaceswidget.h"
 
 class MainWidget : public QWidget
 {
@@ -25,9 +28,17 @@ private:
 
     std::vector<std::unique_ptr<ApplicationIcon>> icons;
     ApplicationLauncer* launcher;
+    WorkspacesWidget* widget;
+    i3::i3ipc* ipc;
+
+    std::unique_ptr<QMenu> popupMenu;
+    QVector<QAction *> actions;
 public:
     MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
-
+public slots:
+    void itemClicked(ApplicationIcon* icon);
+    void itemLongClicked(ApplicationIcon* icon);
+    void popupMenuClicked(int i);
 };
 #endif // MAINWIDGET_H

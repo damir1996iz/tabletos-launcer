@@ -21,7 +21,9 @@ SOURCES += \
     applauncer/applicationlauncer.cpp \
     i3ipc.cpp \
     main.cpp \
-    mainwidget.cpp
+    mainwidget.cpp \
+    widgetanimationcontroller/widgetanimationcontroller.cpp \
+    workspaceswidget/workspaceswidget.cpp
 
 HEADERS += \
     appicon/applicationicon.h \
@@ -29,7 +31,9 @@ HEADERS += \
     applauncer/applicationlauncer.h \
     json/json.hpp \
     i3ipc.h \
-    mainwidget.h
+    mainwidget.h \
+    widgetanimationcontroller/widgetanimationcontroller.h \
+    workspaceswidget/workspaceswidget.h
 
 INCLUDEPATH += /home/damir/Projects/qt/tlauncher
 

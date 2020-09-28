@@ -26,11 +26,14 @@ private:
 
     QTimer* clickTimer;
 public:
+    QList<QString> icons;
+
     ApplicationIcon(QWidget *parent = nullptr);
     void loadIconInfoFromFile(QString filepath);
     void initIconAndText();
     QString getCommand();
     bool isTerminal();
+    QStringList getArgs();
 
     virtual void mousePressEvent(QMouseEvent *event) override;
     virtual void mouseReleaseEvent(QMouseEvent *event) override;

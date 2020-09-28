@@ -5,11 +5,15 @@ ApplicationLauncer::ApplicationLauncer()
 
 }
 
-bool ApplicationLauncer::exec(QString cmd, bool terminal)
+bool ApplicationLauncer::exec(QString cmd, bool terminal, i3::i3ipc* ipc)
 {
+    auto workspaces = ipc->getTree();
+    auto w = i3::workspace::find_minapps(workspaces);
+    ipc->exec_command("workspace "+w.name);
+
     if(terminal)
     {
-        return QProcess::startDetached("xtrerm "+cmd, QStringList()<<"");
+        return QProcess::startDetached("xterm", QStringList()<< cmd);
     }
     else
     {

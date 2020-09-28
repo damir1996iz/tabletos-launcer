@@ -12,6 +12,7 @@ MainWidget::MainWidget(QWidget *parent)
     mainLayout->addWidget(scrollArea);
     scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
     scrollArea->setWidgetResizable( true );
+    QScroller::grabGesture(scrollArea, QScroller::LeftMouseButtonGesture);
 
     innerWidget = new QWidget();
     scrollArea->setWidget(innerWidget);
@@ -28,10 +29,49 @@ MainWidget::MainWidget(QWidget *parent)
         gridLayout->addWidget(item.get(),i/5,i%5);
 
         i++;
+
+        connect(item.get(),SIGNAL(clicked(ApplicationIcon *)),this,SLOT(itemClicked(ApplicationIcon *)));
+        connect(item.get(),SIGNAL(long_clicked(ApplicationIcon *)),this,SLOT(itemLongClicked(ApplicationIcon *)));
+    }
+
+    popupMenu = std::make_unique<QMenu>("Select Workspace menu", this);
+    for(char i = 1;i<=10;i++)
+    {
+        QAction* tmp = new QAction("Open in workspace #"+ QString::number(i), this);
+        connect(tmp,&QAction::triggered,this,[this,i]{popupMenuClicked(i);});
+        actions.append(tmp);
+    }
+
+    for(auto &a:actions)
+    {
+        popupMenu->addAction(a);
     }
 }
 
 MainWidget::~MainWidget()
 {
+}
+
+void MainWidget::itemClicked(ApplicationIcon *icon)
+{
+    ipc = new i3::i3ipc();
+//    qDebug()<<"Start application:";
+//    qDebug()<<icon->isTerminal();
+//    qDebug()<<icon->getCommand();
+//    ApplicationLauncer::exec(icon->getCommand(),icon->isTerminal(),&ipc);
+//    widget = new WorkspacesWidget(ipc);
+//    widget->backWidget = this;
+//    widget->showMaximized();
+//    hide();
+}
+
+void MainWidget::itemLongClicked(ApplicationIcon *icon)
+{
+    popupMenu->exec(mapToGlobal(cursor().pos()));
+}
+
+void MainWidget::popupMenuClicked(int i)
+{
+    qDebug() << i;
 }
 
