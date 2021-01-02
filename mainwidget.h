@@ -27,6 +27,7 @@ private:
     QGridLayout* gridLayout;
 
     std::vector<std::unique_ptr<ApplicationIcon>> icons;
+    ApplicationIcon *selectedIcon;//TODO:Kolhoz!
     ApplicationLauncer* launcher;
     WorkspacesWidget* widget;
     i3::i3ipc* ipc;

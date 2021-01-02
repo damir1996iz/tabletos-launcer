@@ -9,6 +9,7 @@ class ApplicationLauncer
 public:
     ApplicationLauncer();
     static bool exec(QString cmd, bool terminal, i3::i3ipc* ipc);
+    static bool exec(QString cmd, bool terminal, i3::i3ipc* ipc, int num_of_workspace);
 };
 
 #endif // APPLICATIONLAUNCER_H

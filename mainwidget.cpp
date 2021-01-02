@@ -3,7 +3,7 @@
 MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent)
 {
-    qDebug() << this->height() << "::" << this->width();
+    ipc = new i3::i3ipc();
 
     mainLayout = new QVBoxLayout();
     this->setLayout(mainLayout);
@@ -54,24 +54,20 @@ MainWidget::~MainWidget()
 
 void MainWidget::itemClicked(ApplicationIcon *icon)
 {
-    ipc = new i3::i3ipc();
 //    qDebug()<<"Start application:";
 //    qDebug()<<icon->isTerminal();
 //    qDebug()<<icon->getCommand();
-//    ApplicationLauncer::exec(icon->getCommand(),icon->isTerminal(),&ipc);
-//    widget = new WorkspacesWidget(ipc);
-//    widget->backWidget = this;
-//    widget->showMaximized();
-//    hide();
+    ApplicationLauncer::exec(icon->getCommand(),icon->isTerminal(),ipc);
 }
 
 void MainWidget::itemLongClicked(ApplicationIcon *icon)
 {
+    selectedIcon = icon;
     popupMenu->exec(mapToGlobal(cursor().pos()));
 }
 
 void MainWidget::popupMenuClicked(int i)
 {
-    qDebug() << i;
+    ApplicationLauncer::exec(selectedIcon->getCommand(),selectedIcon->isTerminal(),ipc,i);
 }
 

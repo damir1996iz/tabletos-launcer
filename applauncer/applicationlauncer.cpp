@@ -20,3 +20,19 @@ bool ApplicationLauncer::exec(QString cmd, bool terminal, i3::i3ipc* ipc)
         return QProcess::startDetached(cmd, QStringList()<<"");
     }
 }
+
+bool ApplicationLauncer::exec(QString cmd, bool terminal, i3::i3ipc* ipc, int num_of_workspace)
+{
+    ipc->exec_command("workspace "+QString::number(num_of_workspace));
+
+    if(terminal)
+    {
+        return QProcess::startDetached("xterm", QStringList()<< cmd);
+    }
+    else
+    {
+        return QProcess::startDetached(cmd, QStringList()<<"");
+    }
+}
+
+
